@@ -4,10 +4,12 @@ extends Node2D
 export(Array, PackedScene) var faces = []
 
 var current_mood
+var face_animation
 
 enum Face {
 	HAPPY=0,
 	SAD=1,
+	MEH=2,
 }
 
 func _ready():
@@ -22,10 +24,13 @@ func _input(event):
 
 
 func set_face(mood):
-	for child in get_children():
-		child.visible = false
+	if face_animation:
+		face_animation.visible = false
 	match current_mood:
 		Face.HAPPY:
-			$HappyFace.visible = true
+			face_animation = $HappyFace
 		Face.SAD:
-			$SadFace.visible = true
+			face_animation = $SadFace
+		Face.MEH:
+			face_animation = $MehFace
+	face_animation.visible = true
