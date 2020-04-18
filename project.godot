@@ -41,8 +41,13 @@ change_face={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":67,"unicode":0,"echo":false,"script":null)
  ]
 }
+Roll={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [rendering]
 
-environment/default_clear_color=Color( 0.0196078, 0.207843, 0.427451, 1 )
+environment/default_clear_color=Color( 0.0588235, 0.643137, 0.588235, 1 )
 environment/default_environment="res://default_env.tres"
