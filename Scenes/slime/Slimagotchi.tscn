@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/slime/idle_animation.tres" type="Animation" id=1]
 [ext_resource path="res://Textures/slimagotchi/Slime-body2.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/slime/HappyFace.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/slime/happy/HappyFace.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/slime/slimagotchi.gd" type="Script" id=4]
 
 [node name="Slimagotchi" type="Node2D"]
