@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/slime/idle_animation.tres" type="Animation" id=1]
+[ext_resource path="res://Textures/slimagotchi/Slime-body2.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/slime/HappyFace.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/slime/slimagotchi.gd" type="Script" id=4]
+
+[node name="Slimagotchi" type="Node2D"]
+position = Vector2( 194.624, 174.047 )
+script = ExtResource( 4 )
+faces = [ ExtResource( 3 ) ]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="FaceHolder" type="Node2D" parent="."]
+position = Vector2( 0, 8.36241 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+anims/Idle = ExtResource( 1 )
