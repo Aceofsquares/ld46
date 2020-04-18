@@ -30,4 +30,8 @@ func set_face(mood):
 			face_animation = $SadFace
 		MOOD.Mood.MEH:
 			face_animation = $MehFace
+		MOOD.Mood.MAD:
+			face_animation = $MadFace
+		MOOD.Mood.DEAD:
+			face_animation = $DeadFace
 	face_animation.visible = true
