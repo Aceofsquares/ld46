@@ -8,7 +8,6 @@
 extents = Vector2( 32.0742, 31.936 )
 
 [node name="Die" type="Node2D"]
-position = Vector2( 191.729, 183.768 )
 script = ExtResource( 2 )
 
 [node name="Background" type="Sprite" parent="."]
@@ -22,8 +21,18 @@ script = ExtResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
 
-[node name="Tween" type="Tween" parent="."]
+[node name="DieLabel" type="Label" parent="."]
+margin_left = -27.8712
+margin_top = 38.1095
+margin_right = 12.1288
+margin_bottom = 52.1095
+rect_scale = Vector2( 1.49134, 1.12077 )
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="done_animating" from="Pip" to="Pip" method="roll_die"]
 [connection signal="finished_rolling" from="Pip" to="." method="_on_Pip_finished_rolling"]
+[connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_Area2D_mouse_exited"]

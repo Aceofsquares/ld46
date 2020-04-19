@@ -16,11 +16,13 @@ var pip_textures = {
 
 var pips = []
 var pips_copy = []
+var current_pip
 
 func _ready():
 	for pip in pip_textures.keys():
 		pips.append(pip)
 		pips_copy.append(pip)
+	current_pip = pip_types.EMPTY
 	
 func set_pip_texture(pip):
 	texture = pip_textures[pip]
@@ -37,7 +39,6 @@ func animate_die_roll():
 
 func roll_die():
 	var die_roll = randi() % 61
-	var current_pip
 	if die_roll > 55:
 		current_pip = pip_types.SALT 
 	elif die_roll > 50:
