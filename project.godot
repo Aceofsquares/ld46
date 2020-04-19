@@ -48,5 +48,5 @@ roll={
 
 [rendering]
 
-environment/default_clear_color=Color( 0.0588235, 0.643137, 0.588235, 1 )
+environment/default_clear_color=Color( 0.141176, 0.192157, 0.356863, 1 )
 environment/default_environment="res://default_env.tres"
