@@ -12,8 +12,10 @@ var state = GameStates.ROLL_DIE
 
 var _transitions = {
 	[GameStates.ROLL_DIE, GameStates.SELECT_DIE]: GameStates.SELECT_DIE,
+	[GameStates.ROLL_DIE, GameStates.APPLY_DIE]: GameStates.APPLY_DIE,
 	[GameStates.SELECT_DIE, GameStates.APPLY_DIE]: GameStates.APPLY_DIE,
 	[GameStates.APPLY_DIE, GameStates.ROLL_DIE]: GameStates.ROLL_DIE,
+	[GameStates.APPLY_DIE, GameStates.GAME_OVER]: GameStates.GAME_OVER,
 }
 
 var pip_selection = PipTypes.EMPTY
@@ -23,26 +25,18 @@ var die_rolls = []
 func _ready():
 	connect("state_changed", $UI/InstructionLabel, "_on_Main_state_changed")
 
-func _process(delta):
-	match state:
-		GameStates.ROLL_DIE:
-			roll_dice()
-		GameStates.SELECT_DIE:
-			continue
-		GameStates.APPLY_DIE:
-			die_rolls.clear()
+
+func _input(event):
+	if event.is_action_pressed("roll"):
+		emit_signal("roll_die")
+		
 
 func change_state(event):
 	var transition = [state, event]
 	if not transition in _transitions:
 		return
 	state = _transitions[transition]
-	enter_state()
 	emit_signal("state_changed", state)
-
-
-func enter_state():
-	pass
 
 
 func apply_salt():
@@ -50,16 +44,38 @@ func apply_salt():
 
 func apply_stat(pip):
 	print("Apply Stats")
-	state = GameStates.ROLL_DIE
+	change_state(GameStates.ROLL_DIE)
 
 func roll_dice():
 	if Input.is_action_pressed("roll"):
 		emit_signal("roll_die")
-		state = GameStates.PERFORMING
+
+func all(lst, variant):
+	for elem in lst:
+		if elem != variant:
+			return false
+	return true
 
 func recieve_die_roll_pip(pip):
 	die_rolls.append(pip)
-	apply_salt()
+	if pip == PipTypes.SALT:
+		apply_salt()
 	print(die_rolls)
 	if len(die_rolls) == 3:
-		state = GameStates.SELECT_DIE
+		if all(die_rolls, PipTypes.SALT):
+			change_state(GameStates.APPLY_DIE)
+		else:
+			change_state(GameStates.SELECT_DIE)
+
+func receive_selected_die(pip):
+	match pip:
+		PipTypes.EMPTY:
+			print("Selected Empty")
+		PipTypes.FOOD:
+			print("Selected Food")
+		PipTypes.WATER:
+			print("Selected Water")
+		PipTypes.ENTERTAINMENT:
+			print("Selected Entertainment")
+		PipTypes.SLEEP:
+			print("Selected Sleep")
