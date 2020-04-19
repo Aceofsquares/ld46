@@ -79,3 +79,4 @@ func receive_selected_die(pip):
 			print("Selected Entertainment")
 		PipTypes.SLEEP:
 			print("Selected Sleep")
+	change_state(GameStates.APPLY_DIE)
