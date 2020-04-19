@@ -1,6 +1,7 @@
 extends Node2D
 
 signal selected
+signal finished_rolling
 
 var current_pip setget set_current_pip, get_current_pip
 const pip_types = preload("res://Scenes/die/pip_enum.gd")
@@ -29,11 +30,9 @@ func _on_Pip_finished_rolling(pip):
 			print("water")
 		pip_types.SLEEP:
 			print("sleep")
+	emit_signal("finished_rolling", current_pip)
 
 
-func _process(delta):
-	$Tween.interpolate_property(self, "scale", Vector2(1,1), Vector2(1.5,1.5), 0.25, Tween.TRANS_LINEAR, Tween.EASE_IN)
-	
 func _on_Area2D_mouse_entered():
 	modulate = Color(0, 0.50, 0.75, 1)
 	tween_up = true
@@ -42,3 +41,7 @@ func _on_Area2D_mouse_entered():
 func _on_Area2D_mouse_exited():
 	modulate = Color(1, 1, 1, 1)
 	tween_down = true
+
+
+func _on_Main_roll_die():
+	$Pip.animate_die_roll()

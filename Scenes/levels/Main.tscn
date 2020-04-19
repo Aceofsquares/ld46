@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/slime/Slimagotchi.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/die/Die.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/levels/MainGame.gd" type="Script" id=3]
 
 [node name="Main" type="Node"]
+script = ExtResource( 3 )
 
-[node name="Die" parent="." instance=ExtResource( 2 )]
+[node name="Die1" parent="." instance=ExtResource( 2 )]
 position = Vector2( 74.5916, 311.227 )
 
 [node name="Die2" parent="." instance=ExtResource( 2 )]
@@ -15,3 +17,24 @@ position = Vector2( 199.768, 311.227 )
 position = Vector2( 318.944, 311.227 )
 
 [node name="Slimagotchi" parent="." instance=ExtResource( 1 )]
+position = Vector2( 194.624, 138.037 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Instruction" type="Label" parent="UI"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -40.0
+margin_bottom = -26.0
+text = "Press Spacebar to Roll Die"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="roll_die" from="." to="Die1" method="_on_Main_roll_die"]
+[connection signal="roll_die" from="." to="Die3" method="_on_Main_roll_die"]
+[connection signal="roll_die" from="." to="Die2" method="_on_Main_roll_die"]
+[connection signal="finished_rolling" from="Die1" to="." method="recieve_die_roll_pip"]
+[connection signal="finished_rolling" from="Die2" to="." method="recieve_die_roll_pip"]
+[connection signal="finished_rolling" from="Die3" to="." method="recieve_die_roll_pip"]

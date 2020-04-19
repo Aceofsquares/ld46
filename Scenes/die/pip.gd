@@ -17,8 +17,6 @@ var pip_textures = {
 var pips = []
 var pips_copy = []
 
-var can_roll = true
-
 func _ready():
 	for pip in pip_textures.keys():
 		pips.append(pip)
@@ -28,6 +26,7 @@ func set_pip_texture(pip):
 	texture = pip_textures[pip]
 
 func animate_die_roll():
+	randomize()
 	var ri = randi() % len(pips)
 	for i in range((randi() % 15) + 5):
 		set_pip_texture(pips[ri])
@@ -53,10 +52,3 @@ func roll_die():
 		current_pip = pip_types.SLEEP
 	set_pip_texture(current_pip)
 	emit_signal("finished_rolling", current_pip)
-	can_roll = true
-
-func _input(event):
-	if event.is_action_pressed("Roll") and can_roll:
-		can_roll = false
-		randomize()
-		animate_die_roll()
