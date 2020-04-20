@@ -27,7 +27,7 @@ func apply_stat(resource):
 	print("APPLYING " + _resource.pip_text(resource))
 	match resource:
 		_resource.EMPTY:
-			pass
+			ignore_slime()
 		_resource.WATER:
 			drink_water()
 		_resource.FOOD:
@@ -41,6 +41,12 @@ func apply_stat(resource):
 	set_bars()
 	change_face()
 	emit_signal("status_applied", resource)
+
+func ignore_slime():
+	self.fullness -= 1
+	self.quench -= 1
+	self.entertained -= 1
+	self.energy -= 1
 
 func eat_food():
 	self.fullness += 4
@@ -70,7 +76,7 @@ func take_salt_damage():
 	randomize()
 	print("Take Salt Damagef")
 	var resource_die = randi() % 4
-	var damage_die = (randi() % 5) + 1
+	var damage_die = (randi() % 7) + 1
 	if resource_die == 0:
 		self.fullness -= damage_die
 	elif resource_die == 1:
@@ -111,11 +117,11 @@ func set_energy(value):
 func change_face():
 	var sum = fullness + quench + entertained + energy
 	var avg = sum / 4
-	if avg > 20:
+	if avg > 18:
 		$FaceHolder.set_mood(MOOD.Mood.HAPPY)
 	elif avg > 15:
 		$FaceHolder.set_mood(MOOD.Mood.MEH)
-	elif avg > 10:
+	elif avg > 5:
 		$FaceHolder.set_mood(MOOD.Mood.SAD)
 	elif avg > 0:
 		$FaceHolder.set_mood(MOOD.Mood.MAD)

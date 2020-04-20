@@ -8,6 +8,7 @@
 extents = Vector2( 32.0742, 31.936 )
 
 [node name="Die" type="Node2D"]
+position = Vector2( 187.852, 159.919 )
 script = ExtResource( 2 )
 
 [node name="Background" type="Sprite" parent="."]
@@ -22,11 +23,12 @@ script = ExtResource( 3 )
 shape = SubResource( 1 )
 
 [node name="DieLabel" type="Label" parent="."]
-margin_left = -27.8712
-margin_top = 38.1095
-margin_right = 12.1288
-margin_bottom = 52.1095
-rect_scale = Vector2( 1.49134, 1.12077 )
+anchor_right = 1.0
+margin_left = -64.2468
+margin_top = 39.1068
+margin_right = 18.7532
+margin_bottom = 53.1068
+rect_scale = Vector2( 1.59718, 1.08703 )
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false

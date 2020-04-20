@@ -41,7 +41,7 @@ func roll_die():
 	var die_roll = randi() % 61
 	if die_roll > 55:
 		current_pip = pip_types.SALT 
-	elif die_roll > 50:
+	elif die_roll > 45:
 		current_pip = pip_types.EMPTY
 	elif die_roll > 35:
 		current_pip = pip_types.FOOD

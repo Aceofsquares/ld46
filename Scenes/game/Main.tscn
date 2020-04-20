@@ -8,13 +8,16 @@
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
 
-[node name="Die1" parent="." instance=ExtResource( 3 )]
+[node name="DieRack" type="Node2D" parent="."]
+position = Vector2( 0, 34.295 )
+
+[node name="Die1" parent="DieRack" instance=ExtResource( 3 )]
 position = Vector2( 74.5916, 311.227 )
 
-[node name="Die2" parent="." instance=ExtResource( 3 )]
+[node name="Die2" parent="DieRack" instance=ExtResource( 3 )]
 position = Vector2( 199.768, 311.227 )
 
-[node name="Die3" parent="." instance=ExtResource( 3 )]
+[node name="Die3" parent="DieRack" instance=ExtResource( 3 )]
 position = Vector2( 318.944, 311.227 )
 
 [node name="Slimagotchi" parent="." instance=ExtResource( 4 )]
@@ -26,21 +29,23 @@ position = Vector2( 194.624, 138.037 )
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -40.0
-margin_bottom = -26.0
+margin_left = 4.28687
+margin_top = -121.451
+margin_right = 4.28687
+margin_bottom = -107.451
 text = "Press Spacebar to Roll Die"
 align = 1
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="roll_die" from="." to="Die1" method="_on_Main_roll_die"]
-[connection signal="roll_die" from="." to="Die2" method="_on_Main_roll_die"]
-[connection signal="roll_die" from="." to="Die3" method="_on_Main_roll_die"]
-[connection signal="finished_rolling" from="Die1" to="." method="recieve_die_roll_pip"]
-[connection signal="selected" from="Die1" to="." method="receive_selected_die"]
-[connection signal="finished_rolling" from="Die2" to="." method="recieve_die_roll_pip"]
-[connection signal="selected" from="Die2" to="." method="receive_selected_die"]
-[connection signal="finished_rolling" from="Die3" to="." method="recieve_die_roll_pip"]
-[connection signal="selected" from="Die3" to="." method="receive_selected_die"]
+[connection signal="roll_die" from="." to="DieRack/Die2" method="_on_Main_roll_die"]
+[connection signal="roll_die" from="." to="DieRack/Die1" method="_on_Main_roll_die"]
+[connection signal="roll_die" from="." to="DieRack/Die3" method="_on_Main_roll_die"]
+[connection signal="finished_rolling" from="DieRack/Die1" to="." method="recieve_die_roll_pip"]
+[connection signal="selected" from="DieRack/Die1" to="." method="receive_selected_die"]
+[connection signal="finished_rolling" from="DieRack/Die2" to="." method="recieve_die_roll_pip"]
+[connection signal="selected" from="DieRack/Die2" to="." method="receive_selected_die"]
+[connection signal="finished_rolling" from="DieRack/Die3" to="." method="recieve_die_roll_pip"]
+[connection signal="selected" from="DieRack/Die3" to="." method="receive_selected_die"]
 [connection signal="status_applied" from="Slimagotchi" to="." method="_on_Slimagotchi_status_applied"]

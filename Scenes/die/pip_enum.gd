@@ -13,12 +13,12 @@ static func pip_text(pip):
 		EMPTY:
 			return "EMPTY"
 		FOOD:
-			return "FOOD"
+			return "EAT"
 		ENTERTAINMENT:
-			return "ENTERTAINMENT"
+			return "PLAY"
 		SLEEP:
 			return "SLEEP"
 		WATER:
-			return "WATER"
+			return "DRINK"
 		SALT:
-			return "SALT"
+			return "A-SALT"
