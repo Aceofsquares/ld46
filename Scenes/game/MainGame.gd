@@ -9,10 +9,13 @@ const GameStates = preload("res://Scenes/game/game_states.gd")
 var round_number = 1
 
 var state = GameStates.ROLL_DIE
+var salt_applied = 0
+
 
 var _transitions = {
 	[GameStates.ROLL_DIE, GameStates.SELECT_DIE]: GameStates.SELECT_DIE,
 	[GameStates.ROLL_DIE, GameStates.APPLY_DIE]: GameStates.APPLY_DIE,
+	[GameStates.ROLL_DIE, GameStates.ROLL_DIE]: GameStates.ROLL_DIE,
 	[GameStates.SELECT_DIE, GameStates.APPLY_DIE]: GameStates.APPLY_DIE,
 	[GameStates.APPLY_DIE, GameStates.ROLL_DIE]: GameStates.ROLL_DIE,
 	[GameStates.APPLY_DIE, GameStates.GAME_OVER]: GameStates.GAME_OVER,
@@ -36,6 +39,7 @@ func change_state(event):
 	if not transition in _transitions:
 		return
 	state = _transitions[transition]
+	print("Changing state")
 	emit_signal("state_changed", state)
 
 
@@ -43,12 +47,7 @@ func apply_salt():
 	apply_stat(PipTypes.SALT)
 
 func apply_stat(pip):
-	print("Apply Stats")
-	change_state(GameStates.ROLL_DIE)
-
-func roll_dice():
-	if Input.is_action_pressed("roll"):
-		emit_signal("roll_die")
+	$Slimagotchi.apply_stat(pip)
 
 func all(lst, variant):
 	for elem in lst:
@@ -58,13 +57,31 @@ func all(lst, variant):
 
 func recieve_die_roll_pip(pip):
 	die_rolls.append(pip)
+	
+	#Automatically apply salt stat
 	if pip == PipTypes.SALT:
-		apply_salt()
+		apply_stat(pip)
 	if len(die_rolls) == 3:
 		if all(die_rolls, PipTypes.SALT):
-			change_state(GameStates.APPLY_DIE)
+			change_state(GameStates.ROLL_DIE)
 		else:
 			change_state(GameStates.SELECT_DIE)
 
+
 func receive_selected_die(pip):
-	change_state(GameStates.APPLY_DIE)
+	if state == GameStates.SELECT_DIE:
+		change_state(GameStates.APPLY_DIE)
+		apply_stat(pip)
+		die_rolls.clear()
+
+
+func _on_Slimagotchi_status_applied(resource):
+	print("APPLIED " + PipTypes.pip_text(resource))
+	if resource == PipTypes.SALT:
+		salt_applied += 1
+	if salt_applied == 3:
+		change_state(GameStates.ROLL_DIE)
+		salt_applied = 0
+	elif resource != PipTypes.SALT:
+		change_state(GameStates.ROLL_DIE)
+		salt_applied = 0
