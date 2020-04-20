@@ -22,6 +22,7 @@ _global_script_class_icons={
 
 config/name="Pet Slime"
 config/description="Keep your pet slime alive by rolling the die and getting resources."
+config/icon="res://icon.png"
 
 [display]
 
