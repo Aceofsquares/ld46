@@ -19,6 +19,9 @@ func set_current_pip(pip):
 
 func _on_Pip_finished_rolling(pip):
 	self.current_pip = pip
+	if self.current_pip == pip_types.SALT:
+		modulate = Color(1, 1, 1, 0.5)
+		$Area2D/CollisionShape2D.disabled = true
 	emit_signal("finished_rolling", current_pip)
 
 
@@ -34,6 +37,8 @@ func _on_Area2D_mouse_exited():
 
 
 func _on_Main_roll_die():
+	$Area2D/CollisionShape2D.disabled = false
+	modulate = Color(1, 1, 1, 1)
 	$Pip.animate_die_roll()
 
 
