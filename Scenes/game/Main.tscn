@@ -119,6 +119,7 @@ text = "Quit"
 
 [node name="SoundFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+volume_db = -3.487
 [connection signal="roll_die" from="." to="DieRack/Die3" method="_on_Main_roll_die"]
 [connection signal="roll_die" from="." to="DieRack/Die1" method="_on_Main_roll_die"]
 [connection signal="roll_die" from="." to="DieRack/Die2" method="_on_Main_roll_die"]

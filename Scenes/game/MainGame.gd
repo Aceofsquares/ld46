@@ -27,10 +27,12 @@ var die_rolls = []
 
 func _ready():
 	connect("state_changed", $UI/InstructionLabel, "_on_Main_state_changed")
+	$SoundFX.volume_db = -10
 
 
 func _input(event):
 	if state == GameStates.ROLL_DIE and event.is_action_pressed("roll") and not is_rolling: 
+		die_rolls.clear()
 		emit_signal("roll_die")
 		$SoundFX.play()
 		is_rolling = true
@@ -74,7 +76,6 @@ func receive_selected_die(pip):
 	if state == GameStates.SELECT_DIE:
 		change_state(GameStates.APPLY_DIE)
 		apply_stat(pip)
-		die_rolls.clear()
 		is_rolling = false
 
 
@@ -102,4 +103,5 @@ func _on_Quit_pressed():
 
 
 func _on_Slimagotchi_is_dead():
+	state = GameStates.GAME_OVER
 	$UI/GameOverBG.visible = true

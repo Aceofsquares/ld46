@@ -11,14 +11,9 @@ const pip_types = preload("res://Scenes/die/pip_enum.gd")
 
 func _ready():
 	current_pip = $Pip.current_pip
-	for dice in get_tree().get_nodes_in_group("die"):
-		if dice != self:
+	for die in get_tree().get_nodes_in_group("die"):
+		if die != self:
 			connect("selected", self, "_on_Die_selected")
-
-func _process(delta):
-	if self.current_pip == pip_types.SALT:
-		modulate = Color(1, 1, 1, 0.5)
-		$Area2D/CollisionShape2D.disabled = true
 
 func _on_Die_selected(_pip):
 	$Area2D.visible = false
@@ -44,7 +39,6 @@ func _on_Area2D_mouse_entered():
 	emit_signal("hovered_over", current_pip)
 	
 	
-
 func _on_Area2D_mouse_exited():
 	modulate = Color(1, 1, 1, 1)
 	$DieLabel.text = ""
@@ -52,6 +46,7 @@ func _on_Area2D_mouse_exited():
 
 
 func _on_Main_roll_die():
+	$Area2D.visible = false
 	$Area2D/CollisionShape2D.disabled = false
 	modulate = Color(1, 1, 1, 1)
 	$Pip.animate_die_roll()

@@ -27,6 +27,7 @@ func _ready():
 	set_bars()
 	check_if_dead()
 	change_face()
+	$SoundFX.volume_db = -10
 
 func set_bars():
 	$HUD/VBoxContainer/FullnessContainer/FullnessBarBG/FullnessBar.value = fullness
