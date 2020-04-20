@@ -1,10 +1,21 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/game/instruction_label.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/game/MainGame.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/die/Die.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/slime/Slimagotchi.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/ui/environment/border.png" type="Texture" id=5]
+[ext_resource path="res://Fonts/ARLRDBD.TTF" type="DynamicFontData" id=6]
+[ext_resource path="res://Scenes/ui/main_ui_theme.tres" type="Theme" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 6 )
 
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
@@ -25,6 +36,7 @@ position = Vector2( 318.944, 311.227 )
 position = Vector2( 195.481, 182.621 )
 
 [node name="UI" type="CanvasLayer" parent="."]
+layer = 5
 
 [node name="InstructionLabel" type="Label" parent="UI"]
 anchor_top = 1.0
@@ -34,6 +46,7 @@ margin_left = 4.28687
 margin_top = -145.457
 margin_right = 4.28687
 margin_bottom = -131.457
+custom_fonts/font = SubResource( 1 )
 text = "Press Spacebar to Roll Die"
 align = 1
 script = ExtResource( 1 )
@@ -41,7 +54,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="UI"]
+[node name="GameBorder" type="TextureRect" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -49,9 +62,59 @@ texture = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ColorRect" type="ColorRect" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 1, 1, 0.501961 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameOver" type="VBoxContainer" parent="UI/ColorRect"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -1.71478
+margin_top = -37.8655
+margin_right = -1.71478
+margin_bottom = 36.1345
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameOverLabel" type="Label" parent="UI/ColorRect/GameOver"]
+margin_right = 400.0
+margin_bottom = 38.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.772549, 0.160784, 0.160784, 1 )
+text = "GAME OVER"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/ColorRect/GameOver"]
+margin_top = 42.0
+margin_right = 400.0
+margin_bottom = 70.0
+alignment = 1
+
+[node name="RestartBtn" type="Button" parent="UI/ColorRect/GameOver/HBoxContainer"]
+margin_left = 78.0
+margin_right = 198.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 120, 28 )
+theme = ExtResource( 8 )
+text = "Adopt Slime"
+
+[node name="Quit" type="Button" parent="UI/ColorRect/GameOver/HBoxContainer"]
+margin_left = 202.0
+margin_right = 322.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 120, 28 )
+theme = ExtResource( 8 )
+text = "Quit"
 [connection signal="roll_die" from="." to="DieRack/Die1" method="_on_Main_roll_die"]
-[connection signal="roll_die" from="." to="DieRack/Die3" method="_on_Main_roll_die"]
 [connection signal="roll_die" from="." to="DieRack/Die2" method="_on_Main_roll_die"]
+[connection signal="roll_die" from="." to="DieRack/Die3" method="_on_Main_roll_die"]
 [connection signal="finished_rolling" from="DieRack/Die1" to="." method="recieve_die_roll_pip"]
 [connection signal="selected" from="DieRack/Die1" to="." method="receive_selected_die"]
 [connection signal="finished_rolling" from="DieRack/Die2" to="." method="recieve_die_roll_pip"]
@@ -59,3 +122,5 @@ __meta__ = {
 [connection signal="finished_rolling" from="DieRack/Die3" to="." method="recieve_die_roll_pip"]
 [connection signal="selected" from="DieRack/Die3" to="." method="receive_selected_die"]
 [connection signal="status_applied" from="Slimagotchi" to="." method="_on_Slimagotchi_status_applied"]
+[connection signal="pressed" from="UI/ColorRect/GameOver/HBoxContainer/RestartBtn" to="." method="_on_RestartBtn_pressed"]
+[connection signal="pressed" from="UI/ColorRect/GameOver/HBoxContainer/Quit" to="." method="_on_Quit_pressed"]

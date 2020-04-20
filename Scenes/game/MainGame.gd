@@ -85,3 +85,15 @@ func _on_Slimagotchi_status_applied(resource):
 	elif resource != PipTypes.SALT:
 		change_state(GameStates.ROLL_DIE)
 		salt_applied = 0
+
+
+func _on_RestartBtn_pressed():
+	get_tree().reload_current_scene()
+
+
+func _on_Quit_pressed():
+	$UI/ColorRect/GameOver/GameOverLabel.text = "Thanks for playing!"
+	$UI/ColorRect/GameOver/HBoxContainer/RestartBtn.visible = false
+	$UI/ColorRect/GameOver/HBoxContainer/Quit.visible = false
+	yield(get_tree().create_timer(3), "timeout")
+	get_tree().quit()
