@@ -27,7 +27,7 @@ func _ready():
 
 
 func _input(event):
-	if event.is_action_pressed("roll"):
+	if state == GameStates.ROLL_DIE and event.is_action_pressed("roll"):
 		emit_signal("roll_die")
 		
 
@@ -68,15 +68,4 @@ func recieve_die_roll_pip(pip):
 			change_state(GameStates.SELECT_DIE)
 
 func receive_selected_die(pip):
-	match pip:
-		PipTypes.EMPTY:
-			print("Selected Empty")
-		PipTypes.FOOD:
-			print("Selected Food")
-		PipTypes.WATER:
-			print("Selected Water")
-		PipTypes.ENTERTAINMENT:
-			print("Selected Entertainment")
-		PipTypes.SLEEP:
-			print("Selected Sleep")
 	change_state(GameStates.APPLY_DIE)
