@@ -6,7 +6,7 @@ signal state_changed(state)
 const PipTypes = preload("res://Scenes/die/pip_enum.gd")
 const GameStates = preload("res://Scenes/game/game_states.gd")
 
-var round_number = 1
+var round_number = 0
 
 var state = GameStates.ROLL_DIE
 var salt_applied = 0
@@ -31,7 +31,8 @@ func _ready():
 
 
 func _input(event):
-	if state == GameStates.ROLL_DIE and event.is_action_pressed("roll") and not is_rolling: 
+	if state == GameStates.ROLL_DIE and event.is_action_pressed("roll") and not is_rolling:
+		round_number += 1
 		die_rolls.clear()
 		emit_signal("roll_die")
 		$SoundFX.play()
@@ -95,6 +96,7 @@ func _on_RestartBtn_pressed():
 
 
 func _on_Quit_pressed():
+	$UI/GameOverBG/GameOver/DaysLabel.visible = false
 	$UI/GameOverBG/GameOver/GameOverLabel.text = "Thanks for playing!"
 	$UI/GameOverBG/GameOver/HBoxContainer/RestartBtn.visible = false
 	$UI/GameOverBG/GameOver/HBoxContainer/Quit.visible = false
@@ -105,3 +107,4 @@ func _on_Quit_pressed():
 func _on_Slimagotchi_is_dead():
 	state = GameStates.GAME_OVER
 	$UI/GameOverBG.visible = true
+	$UI/GameOverBG/GameOver/DaysLabel.text = "DAYS ALIVE: %d" % round_number 

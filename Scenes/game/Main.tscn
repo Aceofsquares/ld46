@@ -95,10 +95,19 @@ custom_colors/font_color = Color( 0.772549, 0.160784, 0.160784, 1 )
 text = "GAME OVER"
 align = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/GameOverBG/GameOver"]
+[node name="DaysLabel" type="Label" parent="UI/GameOverBG/GameOver"]
 margin_top = 42.0
 margin_right = 400.0
-margin_bottom = 70.0
+margin_bottom = 62.0
+theme = ExtResource( 8 )
+custom_colors/font_color = Color( 0.760784, 0.811765, 0.156863, 1 )
+text = "DAYS ALIVE: 0"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/GameOverBG/GameOver"]
+margin_top = 66.0
+margin_right = 400.0
+margin_bottom = 94.0
 alignment = 1
 
 [node name="RestartBtn" type="Button" parent="UI/GameOverBG/GameOver/HBoxContainer"]

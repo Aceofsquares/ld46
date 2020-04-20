@@ -19,6 +19,7 @@ var entertained = 25 setget set_entertained
 var energy = 25 setget set_energy
 
 var has_died = false
+var my_resource
 
 func _ready():
 	take_salt_damage()
@@ -36,35 +37,53 @@ func set_bars():
 	$HUD/VBoxContainer/EnergyContainer/EnergyBarBG/EnergyBar.value = energy
 
 func apply_stat(resource):
+	my_resource = resource
 	match resource:
 		_resource.EMPTY:
 			$SoundFX.stream = salt_sound
 			$SoundFX.play()
 			ignore_slime()
 		_resource.WATER:
+			$Sprite.visible = false
+			$FaceHolder.visible = false
 			$SoundFX.stream = applied_stat
 			$SoundFX.play()
+			$StatAnimation.visible = true
+			$StatAnimation.play("drink")
 			drink_water()
 		_resource.FOOD:
+			$Sprite.visible = false
+			$FaceHolder.visible = false
 			$SoundFX.stream = applied_stat
 			$SoundFX.play()
+			$StatAnimation.visible = true
+			$StatAnimation.play("eat")
 			eat_food()
 		_resource.SLEEP:
+			$Sprite.visible = false
+			$FaceHolder.visible = false
 			$SoundFX.stream = applied_stat
 			$SoundFX.play()
+			$StatAnimation.visible = true
+			$StatAnimation.play("sleep")
 			sleep()
 		_resource.ENTERTAINMENT:
+			$Sprite.visible = false
+			$FaceHolder.visible = false
 			$SoundFX.stream = applied_stat
 			$SoundFX.play()
+			$StatAnimation.visible = true
+			$StatAnimation.play("entertainment")
 			be_entertained()
 		_resource.SALT:
+			$Sprite.visible = false
+			$FaceHolder.visible = false
 			$SoundFX.stream = salt_sound
 			$SoundFX.play()
+			$StatAnimation.visible = true
+			$StatAnimation.play("salt")
 			take_salt_damage()
-	set_bars()
-	check_if_dead()
-	change_face()
-	emit_signal("status_applied", resource)
+
 
 func check_if_dead():
 	if fullness == 0 or quench == 0 or entertained == 0 or energy == 0:
@@ -195,3 +214,14 @@ func unset_sign():
 	$HUD/VBoxContainer/QuenchContainer/Sign.texture = null
 	$HUD/VBoxContainer/EntertainmentContainer/Sign.texture = null
 	$HUD/VBoxContainer/EnergyContainer/Sign.texture = null
+
+
+func _on_StatAnimation_animation_finished():
+	$Sprite.visible = true
+	$FaceHolder.visible = true
+	$StatAnimation.frame = 0
+	$StatAnimation.visible = false
+	set_bars()
+	check_if_dead()
+	change_face()
+	emit_signal("status_applied", my_resource)
