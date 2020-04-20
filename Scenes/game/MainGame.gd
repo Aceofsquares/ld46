@@ -60,7 +60,6 @@ func recieve_die_roll_pip(pip):
 	die_rolls.append(pip)
 	if pip == PipTypes.SALT:
 		apply_salt()
-	print(die_rolls)
 	if len(die_rolls) == 3:
 		if all(die_rolls, PipTypes.SALT):
 			change_state(GameStates.APPLY_DIE)

@@ -5,5 +5,6 @@ var thirst = 25
 var boredom = 25
 var energy = 25
 
-func _ready():
+
+func apply_stat(resource):
 	pass
