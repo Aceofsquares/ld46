@@ -6,9 +6,6 @@ signal finished_rolling
 var current_pip setget set_current_pip, get_current_pip
 const pip_types = preload("res://Scenes/die/pip_enum.gd")
 
-var tween_up = false
-var tween_down = false
-
 var clicked_once = false
 
 func _ready():
@@ -41,13 +38,12 @@ func _on_Pip_finished_rolling(pip):
 func _on_Area2D_mouse_entered():
 	modulate = Color(0, 0.50, 0.75, 1)
 	$DieLabel.text = pip_types.pip_text(current_pip)
-	tween_up = true
 	
 
 func _on_Area2D_mouse_exited():
 	modulate = Color(1, 1, 1, 1)
 	$DieLabel.text = ""
-	tween_down = true
+	clicked_once = false
 
 
 func _on_Main_roll_die():
@@ -56,7 +52,7 @@ func _on_Main_roll_die():
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
-		print(current_pip)
+		print(clicked_once)
 		if clicked_once:
 			emit_signal("selected", current_pip)
 			clicked_once = false
