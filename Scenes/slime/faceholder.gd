@@ -8,7 +8,6 @@ const MOOD = preload("res://Scenes/slime/mood_enum.gd")
 var current_mood setget set_mood
 var face_animation
 
-
 func _ready():
 	self.current_mood = MOOD.Mood.HAPPY
 

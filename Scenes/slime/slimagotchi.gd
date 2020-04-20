@@ -28,7 +28,6 @@ func set_bars():
 	$HUD/VBoxContainer/EnergyBarBG/EnergyBar.value = energy
 
 func apply_stat(resource):
-	print("APPLYING " + _resource.pip_text(resource))
 	match resource:
 		_resource.EMPTY:
 			ignore_slime()
