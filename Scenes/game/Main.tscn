@@ -117,11 +117,11 @@ rect_min_size = Vector2( 120, 28 )
 theme = ExtResource( 8 )
 text = "Quit"
 
-[node name="SoundFX" type="AudioStreamPlayer2D" parent="."]
+[node name="SoundFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+[connection signal="roll_die" from="." to="DieRack/Die3" method="_on_Main_roll_die"]
 [connection signal="roll_die" from="." to="DieRack/Die1" method="_on_Main_roll_die"]
 [connection signal="roll_die" from="." to="DieRack/Die2" method="_on_Main_roll_die"]
-[connection signal="roll_die" from="." to="DieRack/Die3" method="_on_Main_roll_die"]
 [connection signal="finished_rolling" from="DieRack/Die1" to="." method="recieve_die_roll_pip"]
 [connection signal="hover_exited" from="DieRack/Die1" to="Slimagotchi" method="unset_sign"]
 [connection signal="hovered_over" from="DieRack/Die1" to="Slimagotchi" method="set_sign"]

@@ -30,7 +30,7 @@ func _ready():
 
 
 func _input(event):
-	if state == GameStates.ROLL_DIE and event.is_action_pressed("roll") and not is_rolling:
+	if state == GameStates.ROLL_DIE and event.is_action_pressed("roll") and not is_rolling: 
 		emit_signal("roll_die")
 		$SoundFX.play()
 		is_rolling = true
@@ -65,6 +65,7 @@ func recieve_die_roll_pip(pip):
 	if len(die_rolls) == 3:
 		if all(die_rolls, PipTypes.SALT):
 			change_state(GameStates.ROLL_DIE)
+			is_rolling = false
 		else:
 			change_state(GameStates.SELECT_DIE)
 

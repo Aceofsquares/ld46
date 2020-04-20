@@ -8,10 +8,20 @@ signal hover_exited
 var current_pip setget set_current_pip, get_current_pip
 const pip_types = preload("res://Scenes/die/pip_enum.gd")
 
-var clicked_once = false
 
 func _ready():
 	current_pip = $Pip.current_pip
+	for dice in get_tree().get_nodes_in_group("die"):
+		if dice != self:
+			connect("selected", self, "_on_Die_selected")
+
+func _process(delta):
+	if self.current_pip == pip_types.SALT:
+		modulate = Color(1, 1, 1, 0.5)
+		$Area2D/CollisionShape2D.disabled = true
+
+func _on_Die_selected(_pip):
+	$Area2D.visible = false
 
 func get_current_pip():
 	return current_pip
@@ -21,6 +31,7 @@ func set_current_pip(pip):
 
 func _on_Pip_finished_rolling(pip):
 	self.current_pip = pip
+	$Area2D.visible = true
 	if self.current_pip == pip_types.SALT:
 		modulate = Color(1, 1, 1, 0.5)
 		$Area2D/CollisionShape2D.disabled = true
@@ -37,7 +48,6 @@ func _on_Area2D_mouse_entered():
 func _on_Area2D_mouse_exited():
 	modulate = Color(1, 1, 1, 1)
 	$DieLabel.text = ""
-	clicked_once = false
 	emit_signal("hover_exited")
 
 
@@ -49,8 +59,6 @@ func _on_Main_roll_die():
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
-		if clicked_once:
-			emit_signal("selected", current_pip)
-			clicked_once = false
-		else:
-			clicked_once = true
+		emit_signal("selected", current_pip)
+		$Tween.interpolate_property(self, "rotation", 0, 2 * PI, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
+		$Tween.start()

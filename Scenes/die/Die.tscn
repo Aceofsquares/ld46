@@ -8,7 +8,9 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32.0742, 31.936 )
 
-[node name="Die" type="Node2D"]
+[node name="Die" type="Node2D" groups=[
+"die",
+]]
 position = Vector2( 187.852, 159.919 )
 script = ExtResource( 2 )
 
@@ -24,6 +26,7 @@ script = ExtResource( 3 )
 shape = SubResource( 1 )
 
 [node name="DieLabel" type="Label" parent="."]
+visible = false
 anchor_right = 1.0
 margin_left = -64.2468
 margin_top = 39.1068
@@ -35,6 +38,8 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="done_animating" from="Pip" to="Pip" method="roll_die"]
 [connection signal="finished_rolling" from="Pip" to="." method="_on_Pip_finished_rolling"]
 [connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]

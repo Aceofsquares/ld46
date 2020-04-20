@@ -225,6 +225,9 @@ margin_bottom = 16.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="SoundFX" type="AudioStreamPlayer" parent="."]
+volume_db = -8.557
 [connection signal="value_changed" from="HUD/VBoxContainer/FullnessContainer/FullnessBarBG/FullnessBar" to="HUD/VBoxContainer/FullnessContainer/FullnessBarBG/FullnessBar" method="update_color"]
 [connection signal="value_changed" from="HUD/VBoxContainer/QuenchContainer/QuenchBarBG/QuenchBar" to="HUD/VBoxContainer/QuenchContainer/QuenchBarBG/QuenchBar" method="update_color"]
 [connection signal="value_changed" from="HUD/VBoxContainer/EntertainmentContainer/EntertainmentBarBG/EntertainmentBar" to="HUD/VBoxContainer/EntertainmentContainer/EntertainmentBarBG/EntertainmentBar" method="update_color"]

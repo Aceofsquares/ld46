@@ -7,6 +7,9 @@ const plus_sign = preload("res://Scenes/ui/hud/plus.png")
 const minus_sign = preload("res://Scenes/ui/hud/minus.png")
 const zero_sign = preload("res://Scenes/ui/hud/zero.png")
 
+const salt_sound = preload("res://SoundFX/StatSounds/salt_hit.wav")
+const applied_stat = preload("res://SoundFX/StatSounds/applied_stat.wav")
+
 const MOOD = preload("res://Scenes/slime/mood_enum.gd")
 const _resource = preload("res://Scenes/die/pip_enum.gd")
 
@@ -34,16 +37,28 @@ func set_bars():
 func apply_stat(resource):
 	match resource:
 		_resource.EMPTY:
+			$SoundFX.stream = salt_sound
+			$SoundFX.play()
 			ignore_slime()
 		_resource.WATER:
+			$SoundFX.stream = applied_stat
+			$SoundFX.play()
 			drink_water()
 		_resource.FOOD:
+			$SoundFX.stream = applied_stat
+			$SoundFX.play()
 			eat_food()
 		_resource.SLEEP:
+			$SoundFX.stream = applied_stat
+			$SoundFX.play()
 			sleep()
 		_resource.ENTERTAINMENT:
+			$SoundFX.stream = applied_stat
+			$SoundFX.play()
 			be_entertained()
 		_resource.SALT:
+			$SoundFX.stream = salt_sound
+			$SoundFX.play()
 			take_salt_damage()
 	set_bars()
 	check_if_dead()
@@ -66,7 +81,7 @@ func ignore_slime():
 func eat_food():
 	self.fullness += 4
 	self.quench -= 2
-	self.entertained -= 3
+	#self.entertained -= 3
 	self.energy += 1
 
 func drink_water():
@@ -81,7 +96,7 @@ func be_entertained():
 	self.energy -= 3
 
 func sleep():
-	self.fullness -= 3
+	self.fullness -= 2
 	self.quench -= 2
 	self.entertained += 1
 	self.energy += 4
@@ -160,7 +175,7 @@ func set_sign(resource):
 		_resource.FOOD:
 			$HUD/VBoxContainer/FullnessContainer/Sign.texture = plus_sign
 			$HUD/VBoxContainer/QuenchContainer/Sign.texture = minus_sign
-			$HUD/VBoxContainer/EntertainmentContainer/Sign.texture = minus_sign
+			$HUD/VBoxContainer/EntertainmentContainer/Sign.texture = zero_sign
 			$HUD/VBoxContainer/EnergyContainer/Sign.texture = plus_sign
 		_resource.SLEEP:
 			$HUD/VBoxContainer/FullnessContainer/Sign.texture = minus_sign
