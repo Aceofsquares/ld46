@@ -1,15 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/game/instruction_label.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/game/MainGame.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/die/Die.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/slime/Slimagotchi.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/ui/environment/border.png" type="Texture" id=5]
 
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
 
 [node name="DieRack" type="Node2D" parent="."]
-position = Vector2( 0, 34.295 )
+position = Vector2( 0, 9.43111 )
 
 [node name="Die1" parent="DieRack" instance=ExtResource( 3 )]
 position = Vector2( 74.5916, 311.227 )
@@ -21,7 +22,7 @@ position = Vector2( 199.768, 311.227 )
 position = Vector2( 318.944, 311.227 )
 
 [node name="Slimagotchi" parent="." instance=ExtResource( 4 )]
-position = Vector2( 194.624, 138.037 )
+position = Vector2( 195.481, 182.621 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -30,18 +31,27 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.28687
-margin_top = -121.451
+margin_top = -145.457
 margin_right = 4.28687
-margin_bottom = -107.451
+margin_bottom = -131.457
 text = "Press Spacebar to Roll Die"
 align = 1
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="roll_die" from="." to="DieRack/Die2" method="_on_Main_roll_die"]
+
+[node name="TextureRect" type="TextureRect" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="roll_die" from="." to="DieRack/Die1" method="_on_Main_roll_die"]
 [connection signal="roll_die" from="." to="DieRack/Die3" method="_on_Main_roll_die"]
+[connection signal="roll_die" from="." to="DieRack/Die2" method="_on_Main_roll_die"]
 [connection signal="finished_rolling" from="DieRack/Die1" to="." method="recieve_die_roll_pip"]
 [connection signal="selected" from="DieRack/Die1" to="." method="receive_selected_die"]
 [connection signal="finished_rolling" from="DieRack/Die2" to="." method="recieve_die_roll_pip"]

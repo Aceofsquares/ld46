@@ -10,7 +10,7 @@ var round_number = 1
 
 var state = GameStates.ROLL_DIE
 var salt_applied = 0
-
+var is_rolling = false
 
 var _transitions = {
 	[GameStates.ROLL_DIE, GameStates.SELECT_DIE]: GameStates.SELECT_DIE,
@@ -30,8 +30,9 @@ func _ready():
 
 
 func _input(event):
-	if state == GameStates.ROLL_DIE and event.is_action_pressed("roll"):
+	if state == GameStates.ROLL_DIE and event.is_action_pressed("roll") and not is_rolling:
 		emit_signal("roll_die")
+		is_rolling = true
 		
 
 func change_state(event):
@@ -72,6 +73,7 @@ func receive_selected_die(pip):
 		change_state(GameStates.APPLY_DIE)
 		apply_stat(pip)
 		die_rolls.clear()
+		is_rolling = false
 
 
 func _on_Slimagotchi_status_applied(resource):
