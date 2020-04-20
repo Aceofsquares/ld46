@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/game/instruction_label.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/game/MainGame.gd" type="Script" id=2]
@@ -6,9 +6,12 @@
 [ext_resource path="res://Scenes/slime/Slimagotchi.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/ui/environment/border.png" type="Texture" id=5]
 [ext_resource path="res://Fonts/ARLRDBD.TTF" type="DynamicFontData" id=6]
+[ext_resource path="res://SoundFX/DieRolling/die_rolling.ogg" type="AudioStream" id=7]
 [ext_resource path="res://Scenes/ui/main_ui_theme.tres" type="Theme" id=8]
 
 [sub_resource type="DynamicFont" id=1]
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=2]
@@ -113,6 +116,9 @@ margin_bottom = 28.0
 rect_min_size = Vector2( 120, 28 )
 theme = ExtResource( 8 )
 text = "Quit"
+
+[node name="SoundFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
 [connection signal="roll_die" from="." to="DieRack/Die1" method="_on_Main_roll_die"]
 [connection signal="roll_die" from="." to="DieRack/Die2" method="_on_Main_roll_die"]
 [connection signal="roll_die" from="." to="DieRack/Die3" method="_on_Main_roll_die"]

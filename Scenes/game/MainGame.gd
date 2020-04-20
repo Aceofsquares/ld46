@@ -32,6 +32,7 @@ func _ready():
 func _input(event):
 	if state == GameStates.ROLL_DIE and event.is_action_pressed("roll") and not is_rolling:
 		emit_signal("roll_die")
+		$SoundFX.play()
 		is_rolling = true
 		
 
