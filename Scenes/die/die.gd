@@ -39,7 +39,6 @@ func _on_Main_roll_die():
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
-		print(clicked_once)
 		if clicked_once:
 			emit_signal("selected", current_pip)
 			clicked_once = false
