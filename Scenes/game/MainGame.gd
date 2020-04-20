@@ -39,7 +39,6 @@ func change_state(event):
 	if not transition in _transitions:
 		return
 	state = _transitions[transition]
-	print("Changing state")
 	emit_signal("state_changed", state)
 
 
@@ -76,7 +75,6 @@ func receive_selected_die(pip):
 
 
 func _on_Slimagotchi_status_applied(resource):
-	print("APPLIED " + PipTypes.pip_text(resource))
 	if resource == PipTypes.SALT:
 		salt_applied += 1
 	if salt_applied == 3:

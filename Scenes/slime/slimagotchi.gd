@@ -12,6 +12,16 @@ var energy = 25 setget set_energy
 
 func _ready():
 	change_face()
+	take_salt_damage()
+	take_salt_damage()
+	take_salt_damage()
+	set_bars()
+
+func set_bars():
+	$HUD/VBoxContainer/FullnessBarBG/FullnessBar.value = fullness
+	$HUD/VBoxContainer/QuenchBarBG/QuenchBar.value = quench
+	$HUD/VBoxContainer/EntertainmentBarBG/EntertainmentBar.value = entertained
+	$HUD/VBoxContainer/EnergyBarBG/EnergyBar.value = energy
 
 func apply_stat(resource):
 	print("APPLYING " + _resource.pip_text(resource))
@@ -28,8 +38,7 @@ func apply_stat(resource):
 			be_entertained()
 		_resource.SALT:
 			take_salt_damage()
-	print("My Stats Are")
-	print("FOOD: %d\nQUENCHED: %d\nENTER: %d\nENERGY: %d" % [fullness, quench, entertained, energy])
+	set_bars()
 	change_face()
 	emit_signal("status_applied", resource)
 
@@ -58,6 +67,8 @@ func sleep():
 
 
 func take_salt_damage():
+	randomize()
+	print("Take Salt Damagef")
 	var resource_die = randi() % 4
 	var damage_die = (randi() % 5) + 1
 	if resource_die == 0:
