@@ -3,6 +3,10 @@ extends Node2D
 signal status_applied(resource)
 signal is_dead
 
+const plus_sign = preload("res://Scenes/ui/hud/plus.png")
+const minus_sign = preload("res://Scenes/ui/hud/minus.png")
+const zero_sign = preload("res://Scenes/ui/hud/zero.png")
+
 const MOOD = preload("res://Scenes/slime/mood_enum.gd")
 const _resource = preload("res://Scenes/die/pip_enum.gd")
 
@@ -22,10 +26,10 @@ func _ready():
 	change_face()
 
 func set_bars():
-	$HUD/VBoxContainer/FullnessBarBG/FullnessBar.value = fullness
-	$HUD/VBoxContainer/QuenchBarBG/QuenchBar.value = quench
-	$HUD/VBoxContainer/EntertainmentBarBG/EntertainmentBar.value = entertained
-	$HUD/VBoxContainer/EnergyBarBG/EnergyBar.value = energy
+	$HUD/VBoxContainer/FullnessContainer/FullnessBarBG/FullnessBar.value = fullness
+	$HUD/VBoxContainer/QuenchContainer/QuenchBarBG/QuenchBar.value = quench
+	$HUD/VBoxContainer/EntertainmentContainer/EntertainmentBarBG/EntertainmentBar.value = entertained
+	$HUD/VBoxContainer/EnergyContainer/EnergyBarBG/EnergyBar.value = energy
 
 func apply_stat(resource):
 	match resource:
@@ -139,3 +143,39 @@ func change_face():
 		$FaceHolder.set_mood(MOOD.Mood.SAD)
 	elif avg > 0:
 		$FaceHolder.set_mood(MOOD.Mood.MAD)
+
+
+func set_sign(resource):
+	match resource:
+		_resource.EMPTY:
+			$HUD/VBoxContainer/FullnessContainer/Sign.texture = minus_sign
+			$HUD/VBoxContainer/QuenchContainer/Sign.texture = minus_sign
+			$HUD/VBoxContainer/EntertainmentContainer/Sign.texture = minus_sign
+			$HUD/VBoxContainer/EnergyContainer/Sign.texture = minus_sign
+		_resource.WATER:
+			$HUD/VBoxContainer/FullnessContainer/Sign.texture = zero_sign
+			$HUD/VBoxContainer/QuenchContainer/Sign.texture = plus_sign
+			$HUD/VBoxContainer/EntertainmentContainer/Sign.texture = minus_sign
+			$HUD/VBoxContainer/EnergyContainer/Sign.texture = minus_sign
+		_resource.FOOD:
+			$HUD/VBoxContainer/FullnessContainer/Sign.texture = plus_sign
+			$HUD/VBoxContainer/QuenchContainer/Sign.texture = minus_sign
+			$HUD/VBoxContainer/EntertainmentContainer/Sign.texture = minus_sign
+			$HUD/VBoxContainer/EnergyContainer/Sign.texture = plus_sign
+		_resource.SLEEP:
+			$HUD/VBoxContainer/FullnessContainer/Sign.texture = minus_sign
+			$HUD/VBoxContainer/QuenchContainer/Sign.texture = minus_sign
+			$HUD/VBoxContainer/EntertainmentContainer/Sign.texture = plus_sign
+			$HUD/VBoxContainer/EnergyContainer/Sign.texture = plus_sign
+		_resource.ENTERTAINMENT:
+			$HUD/VBoxContainer/FullnessContainer/Sign.texture = minus_sign
+			$HUD/VBoxContainer/QuenchContainer/Sign.texture = minus_sign
+			$HUD/VBoxContainer/EntertainmentContainer/Sign.texture = plus_sign
+			$HUD/VBoxContainer/EnergyContainer/Sign.texture = minus_sign
+
+
+func unset_sign():
+	$HUD/VBoxContainer/FullnessContainer/Sign.texture = null
+	$HUD/VBoxContainer/QuenchContainer/Sign.texture = null
+	$HUD/VBoxContainer/EntertainmentContainer/Sign.texture = null
+	$HUD/VBoxContainer/EnergyContainer/Sign.texture = null

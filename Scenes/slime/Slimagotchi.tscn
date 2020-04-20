@@ -54,7 +54,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FullnessBarBG" type="TextureRect" parent="HUD/VBoxContainer"]
+[node name="FullnessContainer" type="HBoxContainer" parent="HUD/VBoxContainer"]
+margin_right = 204.0
+margin_bottom = 16.0
+
+[node name="FullnessBarBG" type="TextureRect" parent="HUD/VBoxContainer/FullnessContainer"]
 margin_right = 200.0
 margin_bottom = 16.0
 texture = ExtResource( 10 )
@@ -62,9 +66,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FullnessBar" type="TextureProgress" parent="HUD/VBoxContainer/FullnessBarBG"]
+[node name="FullnessBar" type="TextureProgress" parent="HUD/VBoxContainer/FullnessContainer/FullnessBarBG"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = 1.52588e-05
+margin_bottom = -16.0
 max_value = 25.0
 value = 15.0
 texture_progress = ExtResource( 11 )
@@ -72,16 +78,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="QuenchBarBG" type="TextureRect" parent="HUD/VBoxContainer"]
+[node name="Sign" type="TextureRect" parent="HUD/VBoxContainer/FullnessContainer"]
+margin_left = 204.0
+margin_right = 204.0
+margin_bottom = 16.0
+
+[node name="QuenchContainer" type="HBoxContainer" parent="HUD/VBoxContainer"]
 margin_top = 20.0
-margin_right = 200.0
+margin_right = 204.0
 margin_bottom = 36.0
+
+[node name="QuenchBarBG" type="TextureRect" parent="HUD/VBoxContainer/QuenchContainer"]
+margin_right = 200.0
+margin_bottom = 16.0
 texture = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="QuenchBar" type="TextureProgress" parent="HUD/VBoxContainer/QuenchBarBG"]
+[node name="QuenchBar" type="TextureProgress" parent="HUD/VBoxContainer/QuenchContainer/QuenchBarBG"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 max_value = 25.0
@@ -91,40 +106,72 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EntertainmentBarBG" type="TextureRect" parent="HUD/VBoxContainer"]
+[node name="Sign" type="TextureRect" parent="HUD/VBoxContainer/QuenchContainer"]
+margin_left = 204.0
+margin_right = 204.0
+margin_bottom = 16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EntertainmentContainer" type="HBoxContainer" parent="HUD/VBoxContainer"]
 margin_top = 40.0
-margin_right = 200.0
+margin_right = 204.0
 margin_bottom = 56.0
-texture = ExtResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="EntertainmentBar" type="TextureProgress" parent="HUD/VBoxContainer/EntertainmentBarBG"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 25.0
-value = 15.0
-texture_progress = ExtResource( 11 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="EnergyBarBG" type="TextureRect" parent="HUD/VBoxContainer"]
-margin_top = 60.0
+[node name="EntertainmentBarBG" type="TextureRect" parent="HUD/VBoxContainer/EntertainmentContainer"]
 margin_right = 200.0
-margin_bottom = 76.0
+margin_bottom = 16.0
 texture = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EnergyBar" type="TextureProgress" parent="HUD/VBoxContainer/EnergyBarBG"]
+[node name="EntertainmentBar" type="TextureProgress" parent="HUD/VBoxContainer/EntertainmentContainer/EntertainmentBarBG"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 max_value = 25.0
 value = 15.0
 texture_progress = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sign" type="TextureRect" parent="HUD/VBoxContainer/EntertainmentContainer"]
+margin_left = 204.0
+margin_right = 204.0
+margin_bottom = 16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnergyContainer" type="HBoxContainer" parent="HUD/VBoxContainer"]
+margin_top = 60.0
+margin_right = 204.0
+margin_bottom = 76.0
+
+[node name="EnergyBarBG" type="TextureRect" parent="HUD/VBoxContainer/EnergyContainer"]
+margin_right = 200.0
+margin_bottom = 16.0
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnergyBar" type="TextureProgress" parent="HUD/VBoxContainer/EnergyContainer/EnergyBarBG"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 25.0
+value = 15.0
+texture_progress = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sign" type="TextureRect" parent="HUD/VBoxContainer/EnergyContainer"]
+margin_left = 204.0
+margin_right = 204.0
+margin_bottom = 16.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -113,14 +113,20 @@ margin_bottom = 28.0
 rect_min_size = Vector2( 120, 28 )
 theme = ExtResource( 8 )
 text = "Quit"
-[connection signal="roll_die" from="." to="DieRack/Die3" method="_on_Main_roll_die"]
 [connection signal="roll_die" from="." to="DieRack/Die1" method="_on_Main_roll_die"]
 [connection signal="roll_die" from="." to="DieRack/Die2" method="_on_Main_roll_die"]
+[connection signal="roll_die" from="." to="DieRack/Die3" method="_on_Main_roll_die"]
 [connection signal="finished_rolling" from="DieRack/Die1" to="." method="recieve_die_roll_pip"]
+[connection signal="hover_exited" from="DieRack/Die1" to="Slimagotchi" method="unset_sign"]
+[connection signal="hovered_over" from="DieRack/Die1" to="Slimagotchi" method="set_sign"]
 [connection signal="selected" from="DieRack/Die1" to="." method="receive_selected_die"]
 [connection signal="finished_rolling" from="DieRack/Die2" to="." method="recieve_die_roll_pip"]
+[connection signal="hover_exited" from="DieRack/Die2" to="Slimagotchi" method="unset_sign"]
+[connection signal="hovered_over" from="DieRack/Die2" to="Slimagotchi" method="set_sign"]
 [connection signal="selected" from="DieRack/Die2" to="." method="receive_selected_die"]
 [connection signal="finished_rolling" from="DieRack/Die3" to="." method="recieve_die_roll_pip"]
+[connection signal="hover_exited" from="DieRack/Die3" to="Slimagotchi" method="unset_sign"]
+[connection signal="hovered_over" from="DieRack/Die3" to="Slimagotchi" method="set_sign"]
 [connection signal="selected" from="DieRack/Die3" to="." method="receive_selected_die"]
 [connection signal="is_dead" from="Slimagotchi" to="." method="_on_Slimagotchi_is_dead"]
 [connection signal="status_applied" from="Slimagotchi" to="." method="_on_Slimagotchi_status_applied"]
