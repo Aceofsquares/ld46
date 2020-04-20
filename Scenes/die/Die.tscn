@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Textures/die/Die-Background.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/die/die.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/die/pip.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/ui/main_ui_theme.tres" type="Theme" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32.0742, 31.936 )
@@ -29,6 +30,7 @@ margin_top = 39.1068
 margin_right = 18.7532
 margin_bottom = 53.1068
 rect_scale = Vector2( 1.59718, 1.08703 )
+theme = ExtResource( 4 )
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false

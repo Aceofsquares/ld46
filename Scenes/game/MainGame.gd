@@ -92,8 +92,12 @@ func _on_RestartBtn_pressed():
 
 
 func _on_Quit_pressed():
-	$UI/ColorRect/GameOver/GameOverLabel.text = "Thanks for playing!"
-	$UI/ColorRect/GameOver/HBoxContainer/RestartBtn.visible = false
-	$UI/ColorRect/GameOver/HBoxContainer/Quit.visible = false
+	$UI/GameOverBG/GameOver/GameOverLabel.text = "Thanks for playing!"
+	$UI/GameOverBG/GameOver/HBoxContainer/RestartBtn.visible = false
+	$UI/GameOverBG/GameOver/HBoxContainer/Quit.visible = false
 	yield(get_tree().create_timer(3), "timeout")
 	get_tree().quit()
+
+
+func _on_Slimagotchi_is_dead():
+	$UI/GameOverBG.visible = true

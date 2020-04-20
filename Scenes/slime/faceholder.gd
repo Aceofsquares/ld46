@@ -11,11 +11,6 @@ var face_animation
 
 func _ready():
 	self.current_mood = MOOD.Mood.HAPPY
-	
-#func _input(event):
-#	if event.is_action_pressed("change_face"):
-#		current_mood += 1
-#		set_face(current_mood)
 
 func _process(_delta):
 	if face_animation:

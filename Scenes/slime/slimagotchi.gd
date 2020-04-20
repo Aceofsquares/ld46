@@ -1,6 +1,7 @@
 extends Node2D
 
 signal status_applied(resource)
+signal is_dead
 
 const MOOD = preload("res://Scenes/slime/mood_enum.gd")
 const _resource = preload("res://Scenes/die/pip_enum.gd")
@@ -10,12 +11,15 @@ var quench = 25 setget set_quench
 var entertained = 25 setget set_entertained
 var energy = 25 setget set_energy
 
+var has_died = false
+
 func _ready():
-	change_face()
 	take_salt_damage()
 	take_salt_damage()
 	take_salt_damage()
 	set_bars()
+	check_if_dead()
+	change_face()
 
 func set_bars():
 	$HUD/VBoxContainer/FullnessBarBG/FullnessBar.value = fullness
@@ -39,8 +43,16 @@ func apply_stat(resource):
 		_resource.SALT:
 			take_salt_damage()
 	set_bars()
+	check_if_dead()
 	change_face()
 	emit_signal("status_applied", resource)
+
+func check_if_dead():
+	if fullness == 0 or quench == 0 or entertained == 0 or energy == 0:
+		has_died = true
+	if has_died:
+		$AnimationPlayer.stop()
+		emit_signal("is_dead")
 
 func ignore_slime():
 	self.fullness -= 1
@@ -74,7 +86,6 @@ func sleep():
 
 func take_salt_damage():
 	randomize()
-	print("Take Salt Damagef")
 	var resource_die = randi() % 4
 	var damage_die = (randi() % 7) + 1
 	if resource_die == 0:
@@ -115,8 +126,12 @@ func set_energy(value):
 		energy = 0
 
 func change_face():
+	if has_died:
+		$FaceHolder.set_mood(MOOD.Mood.DEAD)
+		return
 	var sum = fullness + quench + entertained + energy
 	var avg = sum / 4
+	
 	if avg > 18:
 		$FaceHolder.set_mood(MOOD.Mood.HAPPY)
 	elif avg > 15:
@@ -125,5 +140,3 @@ func change_face():
 		$FaceHolder.set_mood(MOOD.Mood.SAD)
 	elif avg > 0:
 		$FaceHolder.set_mood(MOOD.Mood.MAD)
-	else:
-		$FaceHolder.set_mood(MOOD.Mood.DEAD)

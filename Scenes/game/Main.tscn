@@ -63,7 +63,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="UI"]
+[node name="GameOverBG" type="ColorRect" parent="UI"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 1, 1, 1, 0.501961 )
@@ -71,7 +72,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GameOver" type="VBoxContainer" parent="UI/ColorRect"]
+[node name="GameOver" type="VBoxContainer" parent="UI/GameOverBG"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
@@ -83,7 +84,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GameOverLabel" type="Label" parent="UI/ColorRect/GameOver"]
+[node name="GameOverLabel" type="Label" parent="UI/GameOverBG/GameOver"]
 margin_right = 400.0
 margin_bottom = 38.0
 custom_fonts/font = SubResource( 2 )
@@ -91,13 +92,13 @@ custom_colors/font_color = Color( 0.772549, 0.160784, 0.160784, 1 )
 text = "GAME OVER"
 align = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/ColorRect/GameOver"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/GameOverBG/GameOver"]
 margin_top = 42.0
 margin_right = 400.0
 margin_bottom = 70.0
 alignment = 1
 
-[node name="RestartBtn" type="Button" parent="UI/ColorRect/GameOver/HBoxContainer"]
+[node name="RestartBtn" type="Button" parent="UI/GameOverBG/GameOver/HBoxContainer"]
 margin_left = 78.0
 margin_right = 198.0
 margin_bottom = 28.0
@@ -105,22 +106,23 @@ rect_min_size = Vector2( 120, 28 )
 theme = ExtResource( 8 )
 text = "Adopt Slime"
 
-[node name="Quit" type="Button" parent="UI/ColorRect/GameOver/HBoxContainer"]
+[node name="Quit" type="Button" parent="UI/GameOverBG/GameOver/HBoxContainer"]
 margin_left = 202.0
 margin_right = 322.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 120, 28 )
 theme = ExtResource( 8 )
 text = "Quit"
+[connection signal="roll_die" from="." to="DieRack/Die3" method="_on_Main_roll_die"]
 [connection signal="roll_die" from="." to="DieRack/Die1" method="_on_Main_roll_die"]
 [connection signal="roll_die" from="." to="DieRack/Die2" method="_on_Main_roll_die"]
-[connection signal="roll_die" from="." to="DieRack/Die3" method="_on_Main_roll_die"]
 [connection signal="finished_rolling" from="DieRack/Die1" to="." method="recieve_die_roll_pip"]
 [connection signal="selected" from="DieRack/Die1" to="." method="receive_selected_die"]
 [connection signal="finished_rolling" from="DieRack/Die2" to="." method="recieve_die_roll_pip"]
 [connection signal="selected" from="DieRack/Die2" to="." method="receive_selected_die"]
 [connection signal="finished_rolling" from="DieRack/Die3" to="." method="recieve_die_roll_pip"]
 [connection signal="selected" from="DieRack/Die3" to="." method="receive_selected_die"]
+[connection signal="is_dead" from="Slimagotchi" to="." method="_on_Slimagotchi_is_dead"]
 [connection signal="status_applied" from="Slimagotchi" to="." method="_on_Slimagotchi_status_applied"]
-[connection signal="pressed" from="UI/ColorRect/GameOver/HBoxContainer/RestartBtn" to="." method="_on_RestartBtn_pressed"]
-[connection signal="pressed" from="UI/ColorRect/GameOver/HBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="UI/GameOverBG/GameOver/HBoxContainer/RestartBtn" to="." method="_on_RestartBtn_pressed"]
+[connection signal="pressed" from="UI/GameOverBG/GameOver/HBoxContainer/Quit" to="." method="_on_Quit_pressed"]
